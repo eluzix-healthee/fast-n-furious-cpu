@@ -4,6 +4,15 @@ version = "0.1.0"
 edition = "2021"
 build = "build.rs"
 
+[[bin]]
+name = "dependency_chain"
+path = "src/dependency_chain.rs"
+
+[[bin]]
+name = "load_store_ports"
+path = "src/load_store_ports.rs"
+
+
 [dependencies]
 libc = "0.2.155"
 mach = "0.3.2"
