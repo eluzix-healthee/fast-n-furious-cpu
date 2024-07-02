@@ -5,6 +5,10 @@
 .global _Read_x4
 
 
+; These functions iterate over a loop for x0 times (1st parameter)
+; and READ the value from memory located in the address within x1 (2nd parameter) 
+
+
 _Read_x1:
 loop1:
     ldr x2,[x1]
