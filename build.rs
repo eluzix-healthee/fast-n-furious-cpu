@@ -1,11 +1,4 @@
-use std::env;
-
 fn main() {
-
-    match env::var("OBJ_FILE") {
-        Ok(object_file) => {
-            println!("cargo:rustc-link-arg={}", object_file);
-        },
-        Err(_) => {}
-    }
+    println!("cargo:rustc-link-arg=dependency-chain.o");
+    println!("cargo:rustc-link-arg=load-store-ports.o");
 }

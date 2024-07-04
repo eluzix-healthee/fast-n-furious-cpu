@@ -84,6 +84,7 @@ pub fn get_page_faults(pid: pid_t) -> i32 {
     }
 }
 
+#[allow(dead_code)]
 pub fn high_resolution_info() -> mach_timebase_info {
     unsafe {
         let mut info = mach_timebase_info { numer: 0, denom: 0 };
@@ -92,10 +93,12 @@ pub fn high_resolution_info() -> mach_timebase_info {
     }
 }
 
+#[allow(dead_code)]
 pub fn high_resolution_time() -> u64 {
     unsafe { mach_absolute_time() }
 }
 
+#[allow(dead_code)]
 pub fn high_resolution_clock() -> Duration {
     unsafe {
         let time = mach_absolute_time();
@@ -106,34 +109,30 @@ pub fn high_resolution_clock() -> Duration {
     }
 }
 
+// #[derive(Debug)]
+// pub struct VirtualAddress {
+//     l1_index: u16,
+//     l2_index: u16,
+//     l3_index: u16,
+//     l4_index: u16,
+//     offset: u16,
+// }
 
-#[derive(Debug)]
-pub struct VirtualAddress {
-    l1_index: u16,
-    l2_index: u16,
-    l3_index: u16,
-    l4_index: u16,
-    offset: u16,
-}
+// impl VirtualAddress {
+//     pub fn from_pointer(pointer: usize) -> Self {
+//         VirtualAddress {
+//             l1_index: ((pointer >> 47) & 0x1) as u16,
+//             l2_index: ((pointer >> 36) & 0x7FF) as u16,
+//             l3_index: ((pointer >> 25) & 0x7FF) as u16,
+//             l4_index: ((pointer >> 14) & 0x7FF) as u16,
+//             offset: (pointer & 0x03FFF) as u16,
+//         }
+//     }
 
-impl VirtualAddress {
-    pub fn from_pointer(pointer: usize) -> Self {
-        VirtualAddress {
-            l1_index: ((pointer >> 47) & 0x1) as u16,
-            l2_index: ((pointer >> 36) & 0x7FF) as u16,
-            l3_index: ((pointer >> 25) & 0x7FF) as u16,
-            l4_index: ((pointer >> 14) & 0x7FF) as u16,
-            offset: (pointer & 0x03FFF) as u16,
-        }
-    }
-
-    pub fn print(&self) {
-        println!("{} | {} | {} | {} | {}",
-                 self.l1_index,
-                 self.l2_index,
-                 self.l3_index,
-                 self.l4_index,
-                 self.offset
-        );
-    }
-}
+//     pub fn print(&self) {
+//         println!(
+//             "{} | {} | {} | {} | {}",
+//             self.l1_index, self.l2_index, self.l3_index, self.l4_index, self.offset
+//         );
+//     }
+// }

@@ -1,6 +1,6 @@
+use crate::repetition_tester::RepetitionTester;
 use std::cell::RefCell;
 use std::rc::Rc;
-use crate::repetition_tester::repetition_tester::RepetitionTester;
 
 mod perf_metrics;
 mod repetition_tester;
@@ -42,16 +42,8 @@ fn main() {
     let mut var: u8 = 0;
 
     let functions = vec![
-        TesterFunction::new(
-            "Example 1",
-            total_size,
-            TestExample1
-        ),
-        TesterFunction::new(
-            "Example 2",
-            total_size,
-            TestExample2
-        )
+        TesterFunction::new("Example 1", total_size, TestExample1),
+        TesterFunction::new("Example 2", total_size, TestExample2),
     ];
 
     let params = TestParams {
@@ -69,7 +61,7 @@ fn main() {
                 (ft.function)(ft.count, &mut var);
             }
             tester.end_time();
-            tester.count_bytes(total_size as u64);
+            tester.count_bytes(total_size);
         }
     }
 }

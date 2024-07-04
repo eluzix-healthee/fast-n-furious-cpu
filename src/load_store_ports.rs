@@ -1,9 +1,9 @@
+use crate::repetition_tester::RepetitionTester;
+use libc::{mmap, size_t, MAP_ANON, MAP_PRIVATE, PROT_READ, PROT_WRITE};
 use std::cell::RefCell;
 use std::error::Error;
 use std::ptr;
 use std::rc::Rc;
-use libc::{mmap, size_t, MAP_ANON, MAP_PRIVATE, PROT_READ, PROT_WRITE};
-use crate::repetition_tester::repetition_tester::RepetitionTester;
 
 mod perf_metrics;
 mod repetition_tester;
@@ -16,10 +16,8 @@ extern "C" {
 }
 
 struct TestParams {
-    // file_name: &'static str,
     expected_bytes: u64,
     seconds_to_try: u64,
-    buffer: *mut u8,
 }
 
 struct TesterFunction {
@@ -41,7 +39,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         )
     };
 
-    let mut functions = vec![
+    let functions = vec![
         TesterFunction {
             name: "Read_x1",
             function: Read_x1,
@@ -67,7 +65,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     let params = TestParams {
         expected_bytes: total_size as u64,
         seconds_to_try: 2,
-        buffer: addr as *mut u8,
     };
 
     loop {
